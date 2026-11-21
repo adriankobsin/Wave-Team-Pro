@@ -1,0 +1,19 @@
+[
+ "Clock times are local time where each project is",
+ "Clock-ins on this project show in this time zone.",
+ "No travel coordinator is set for this company yet. Add one under Travel → Coordinators.",
+ "Reminder sent by",
+ "Reminder — travel request",
+ "Reminder: this travel and accommodation request is still waiting. Please arrange it, or reply if it is already done:",
+ "Resend travel request",
+ "Same as the company",
+ "There's no open travel request to send. It may already be booked or cancelled.",
+ "You can't send travel requests in this company.",
+ "time",
+ "time)",
+ "({0} people)",
+ "Reminder emailed to {0}.",
+ "Times are local time where each project is (now {0})",
+ "Week of {0} – {1} · clock times in each project's local time",
+ "{0} · {1} · week of {2} · clock times in each project's local time"
+]

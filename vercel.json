@@ -1,0 +1,19 @@
+{
+  "regions": [
+    "sin1"
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/weekly-timesheets",
+      "schedule": "0 6 * * 1"
+    },
+    {
+      "path": "/api/cron/sharepoint",
+      "schedule": "30 0 * * *"
+    },
+    {
+      "path": "/api/cron/m365-sync",
+      "schedule": "0 0 * * *"
+    }
+  ]
+}

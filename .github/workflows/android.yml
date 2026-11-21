@@ -1,0 +1,54 @@
+# Builds the Wave Team Pro Android app (Trusted Web Activity in android/) on GitHub's runners, which have
+# the Android SDK. Output is UNSIGNED: it is signed afterwards with your own upload key, which is
+# never stored in this repository. Results are attached to a pre-release named android-build-<n>.
+name: Android app
+
+on:
+  # Run by hand (Actions → Android app → Run workflow) after setting APP_HOST / APP_ID / APP_NAME below.
+  workflow_dispatch:
+    inputs:
+      app_host: { description: "Your site's host name, e.g. team.yourcompany.com", required: true }
+      app_id: { description: "Android package id, e.g. com.yourcompany.team", required: true, default: "com.waveteampro.app" }
+      app_name: { description: "Name under the app icon", required: true, default: "Wave Team Pro" }
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: "17" }
+      - uses: gradle/actions/setup-gradle@v4
+        with: { gradle-version: "8.14.3" }
+      - name: Accept SDK licences and install platform 36
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36" "build-tools;36.0.0" > /dev/null
+      - name: Build bundle and APK (unsigned)
+        env:
+          VERSION_CODE: ${{ github.run_number }}
+          VERSION_NAME: 1.0.${{ github.run_number }}
+          APP_HOST: ${{ inputs.app_host }}
+          APP_ID: ${{ inputs.app_id }}
+          APP_NAME: ${{ inputs.app_name }}
+        run: gradle -p android --no-daemon bundleRelease assembleRelease
+      - name: Collect outputs and the signing tools
+        run: |
+          mkdir out
+          cp android/app/build/outputs/bundle/release/app-release.aab out/wave-team-pro-unsigned.aab
+          cp android/app/build/outputs/apk/release/app-release-unsigned.apk out/wave-team-pro-unsigned.apk
+          cp "$ANDROID_HOME/build-tools/36.0.0/lib/apksigner.jar" out/apksigner.jar
+          cp "$ANDROID_HOME/build-tools/36.0.0/zipalign" out/zipalign
+          ls -la out
+      - name: Publish as a pre-release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "android-build-${{ github.run_number }}" out/* --prerelease \
+            --title "Android build ${{ github.run_number }} (unsigned)" \
+            --notes "Unsigned build of the Wave Team Pro Android app, version 1.0.${{ github.run_number }} (code ${{ github.run_number }}). Sign with your own upload key before installing or uploading to Google Play." \
+            --target "${{ github.sha }}"

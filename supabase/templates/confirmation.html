@@ -1,0 +1,11 @@
+<!doctype html>
+<html><body style="margin:0;background:#f4f5f7;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#1d2433">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:32px 16px">
+<table role="presentation" width="100%" style="max-width:520px;background:#ffffff;border-radius:12px;padding:32px">
+<tr><td>
+<p style="margin:0 0 24px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#5b6475">Wave Team Pro</p>
+<h1 style="margin:0 0 12px;font-size:22px">Confirm your email</h1>
+<p style="margin:0 0 24px;line-height:1.55">Confirm this email address to finish setting up your Wave Team Pro account.</p>
+<p style="margin:0 0 24px"><a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=email&next=/" style="display:inline-block;background:#0f3d5e;color:#ffffff;text-decoration:none;padding:12px 20px;border-radius:8px;font-weight:600">Continue</a></p>
+<p style="margin:0;font-size:12px;color:#5b6475;line-height:1.5">This message was sent to {{ .Email }}. Never forward this email: the link signs you in.</p>
+</td></tr></table></td></tr></table></body></html>

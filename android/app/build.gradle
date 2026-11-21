@@ -1,0 +1,40 @@
+plugins { id "com.android.application" }
+
+// Wave Team Pro for Android: a Trusted Web Activity that opens your deployment (APP_HOST)
+// full screen (no browser bar) once Digital Asset Links verify (public/.well-known/assetlinks.json).
+// Set APP_HOST (e.g. team.yourcompany.com) and APP_ID (e.g. com.yourcompany.team) when building.
+def host = System.getenv("APP_HOST") ?: "your-app.vercel.app"
+def appId = System.getenv("APP_ID") ?: "com.waveteampro.app"
+
+android {
+    namespace "com.waveteampro.app"
+    compileSdk 36
+
+    defaultConfig {
+        applicationId appId
+        minSdk 23
+        targetSdk 36
+        versionCode Integer.parseInt(System.getenv("VERSION_CODE") ?: "1")
+        versionName System.getenv("VERSION_NAME") ?: "1.0.0"
+        manifestPlaceholders = [
+            hostName: host,
+            defaultUrl: "https://${host}/",
+            launcherName: System.getenv("APP_NAME") ?: "Wave Team Pro",
+            assetStatements: "[{ \\\"relation\\\": [\\\"delegate_permission/common.handle_all_urls\\\"], \\\"target\\\": {\\\"namespace\\\": \\\"web\\\", \\\"site\\\": \\\"https://${host}\\\"}}]".toString(),
+        ]
+    }
+    buildTypes {
+        release {
+            // Signed after the build with your own upload key (kept out of this repository).
+            minifyEnabled false
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation "com.google.androidbrowserhelper:androidbrowserhelper:2.5.0"
+}

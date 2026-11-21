@@ -1,0 +1,19 @@
+[
+ "Kellonajat ovat paikallista aikaa kunkin projektin sijaintipaikassa",
+ "Tämän projektin kellotukset näytetään tässä aikavyöhykkeessä.",
+ "Tälle yritykselle ei ole vielä asetettu matkakoordinaattoria. Lisää sellainen kohdassa Matkat → Koordinaattorit.",
+ "Muistutuksen lähetti",
+ "Muistutus — matkapyyntö",
+ "Muistutus: tämä matka- ja majoituspyyntö odottaa edelleen. Hoida se tai vastaa, jos se on jo tehty:",
+ "Lähetä matkapyyntö uudelleen",
+ "Sama kuin yrityksellä",
+ "Avoimia matkapyyntöjä ei ole lähetettävänä. Se on ehkä jo varattu tai peruttu.",
+ "Et voi lähettää matkapyyntöjä tässä yrityksessä.",
+ "aika",
+ "aika)",
+ "({0} henkilöä)",
+ "Muistutus lähetetty sähköpostitse: {0}.",
+ "Ajat ovat paikallista aikaa kunkin projektin sijaintipaikassa (nyt {0})",
+ "Viikko {0} – {1} · kellonajat kunkin projektin paikallisessa ajassa",
+ "{0} · {1} · viikko {2} · kellonajat kunkin projektin paikallisessa ajassa"
+]

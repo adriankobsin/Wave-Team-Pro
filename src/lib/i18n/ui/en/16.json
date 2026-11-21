@@ -1,0 +1,11 @@
+[
+ "Cable extended.",
+ "Drag a white square to move a bend, or a white bar to move that part of the cable (it stays square). Double-click a square to remove the bend. Delete key removes the cable; Esc deselects.",
+ "Drag to move this part of the cable",
+ "Edit details",
+ "Extend from end",
+ "Extend from start",
+ "To change the route, drag the white squares (bends) or white bars (straight parts) on the cable; double-click a square to remove that bend.",
+ "Extending a {0} cable",
+ "Segment {0}"
+]

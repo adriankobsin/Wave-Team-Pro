@@ -1,0 +1,10 @@
+[
+ "Opens a PDF of every site schedule and the rack elevations for the project.",
+ "Opens a PDF of everything connected to that lighting panel: modules, outputs, zones, fixtures and DALI addresses.",
+ "Opens a PDF of that panel's cable schedule: every port, cable number, room, device, test result and length.",
+ "Opens a PDF of the rack: what's in each U, its patch panels with their schedules, and the switches in that room.",
+ "Opens a PDF of the switch: every port with VLAN, patch panel port, end device, PoE and IP.",
+ "Opens the drawing as a PDF with its layers and legend. If a newer revision is uploaded later, the sticker opens that one.",
+ "Stickers for racks, patch panels, switches, lighting panels and drawings. An engineer scans one with their phone and gets a PDF of that exact item, made from the live schedule at that moment, to read or save on the phone. Stickers already printed keep working. Codes only open for people signed in with access to this project.",
+ "{0}; filename=\"{1}\"; filename*=UTF-8''{2}"
+]

@@ -1,0 +1,10 @@
+[
+ "Deschide un PDF cu toate tabelele de șantier și elevațiile rack-urilor proiectului.",
+ "Deschide un PDF cu tot ce e conectat la acel panou de iluminat: module, ieșiri, zone, corpuri de iluminat și adrese DALI.",
+ "Deschide un PDF cu tabelul de cabluri al panoului: fiecare port, număr de cablu, cameră, dispozitiv, rezultat și lungime.",
+ "Deschide un PDF al rack-ului: ce e în fiecare U, patch panel-urile cu tabelele lor și switch-urile din acea cameră.",
+ "Deschide un PDF al switch-ului: fiecare port cu VLAN, port de patch panel, dispozitiv final, PoE și IP.",
+ "Deschide desenul ca PDF cu straturile și legenda lui. Dacă mai târziu se încarcă o revizie nouă, eticheta o deschide pe aceea.",
+ "Etichete pentru rack-uri, patch panel-uri, switch-uri, panouri de iluminat și desene. Un inginer scanează una cu telefonul și primește un PDF al acelui element, generat din tabelul actualizat în acel moment, de citit sau salvat pe telefon. Etichetele deja tipărite funcționează în continuare. Codurile se deschid doar pentru persoanele autentificate cu acces la acest proiect.",
+ "{0}; filename=\"{1}\"; filename*=UTF-8''{2}"
+]

@@ -1,0 +1,10 @@
+[
+ "Avaa PDF:n, jossa ovat projektin kaikki kohdeluettelot ja räkkikuvat.",
+ "Avaa PDF:n kaikesta valaistuspaneeliin kytketystä: moduulit, lähdöt, vyöhykkeet, valaisimet ja DALI-osoitteet.",
+ "Avaa PDF:n paneelin kaapeliluettelosta: jokainen portti, kaapelinumero, huone, laite, testitulos ja pituus.",
+ "Avaa PDF:n räkistä: mitä kussakin U:ssa on, sen kytkentäpaneelit luetteloineen ja huoneen kytkimet.",
+ "Avaa PDF:n kytkimestä: jokainen portti VLANin, kytkentäpaneelin portin, päätelaitteen, PoE:n ja IP:n kanssa.",
+ "Avaa piirustuksen PDF:nä tasoineen ja selitteineen. Jos myöhemmin ladataan uudempi revisio, tarra avaa sen.",
+ "Tarrat räkkeihin, kytkentäpaneeleihin, kytkimiin, valaistuspaneeleihin ja piirustuksiin. Asentaja skannaa tarran puhelimellaan ja saa kyseisestä kohteesta PDF:n, joka luodaan sen hetken ajantasaisesta luettelosta luettavaksi tai tallennettavaksi puhelimeen. Jo tulostetut tarrat toimivat edelleen. Koodit aukeavat vain kirjautuneille, joilla on pääsy tähän projektiin.",
+ "{0}; filename=\"{1}\"; filename*=UTF-8''{2}"
+]
