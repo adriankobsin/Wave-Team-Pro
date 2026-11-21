@@ -17,7 +17,7 @@ customer.
 | Optional integrations | Microsoft 365 (Outlook invites and email from a shared mailbox, SharePoint filing, Planner / To Do project sync) via Microsoft Graph app-only; Xero expense export; AI receipt reading (Anthropic or OpenAI) |
 | Tests | Vitest — unit, and integration against a real Postgres with every migration applied (RLS and escalation suites); Playwright E2E |
 
-**Setting up a new customer:** follow [docs/deploy/new-customer.md](docs/deploy/new-customer.md).
+**Help:** the complete guide to deployment, integrations and updates is [HELP.md](HELP.md). The short versions are in [Help](#help) below.
 
 ## Your brand
 
@@ -204,16 +204,52 @@ Never commit values. Mark secrets **Sensitive**.
 | `EMAIL_PROVIDER_API_KEY`, `EMAIL_FROM` | Transactional email (Resend) |
 | `AI_PROVIDER`, `AI_API_KEY`, `AI_MODEL` | Receipt reading |
 
-Microsoft 365 setup is in [docs/deploy/microsoft-365.md](docs/deploy/microsoft-365.md).
+Microsoft 365 setup is in [HELP.md §5.4](HELP.md#54-microsoft-365-outlook-sharepoint-planner) and [docs/deploy/microsoft-365.md](docs/deploy/microsoft-365.md).
 
 Scheduled jobs (`vercel.json`): weekly timesheets every Monday 06:00 UTC; SharePoint filing and
 Outlook retries daily 00:30 UTC; Microsoft 365 project sync daily 00:00 UTC. Outlook changes are otherwise sent within seconds.
 
-## Deploying
-Connect the repository to a Vercel project; Vercel builds every push to `Main`. Apply database
-changes with `npx supabase db push` (or paste each new file from `supabase/migrations/` into the
-Supabase SQL editor, in order). Full guide: [docs/deploy/new-customer.md](docs/deploy/new-customer.md)
-and [docs/deploy/production.md](docs/deploy/production.md).
+## Help
+
+Full step-by-step instructions, click by click: **[HELP.md](HELP.md)**.
+
+### Deployment (new customer) — short version
+1. **Supabase**: New project → Authentication → Sign In / Providers → Email: sign-up **off**,
+   confirm email **on** → URL Configuration: Site URL and `/auth/confirm` redirect → Emails →
+   Templates: paste `supabase/templates/*.html` → SMTP Settings: your sender.
+2. **Database**: `npx supabase link --project-ref <ref>` then `npx supabase db push`
+   (or run every file in `supabase/migrations/` in order in the SQL Editor). Never run the seed or demo files.
+3. **Vercel**: New project from this repository → add `NEXT_PUBLIC_SUPABASE_URL`,
+   `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `APP_BASE_URL`, `RATE_LIMIT_SALT`,
+   `CRON_SECRET` → **Deploy** → Settings → Domains: add the customer's address.
+4. **First sign-in**: create the owner in Supabase → Authentication → Users, make them platform
+   owner with SQL (HELP.md 4.1) → sign in → `/platform` → create each company and invite its Super Admin.
+5. Check invitations, password reset and a basic employee account (HELP.md 4.4).
+
+Details: [HELP.md §3–4](HELP.md#3-deployment-setting-up-a-new-customer).
+
+### Integrations — short version
+| Integration | Turn it on |
+|---|---|
+| Email | Resend domain + API key → `EMAIL_PROVIDER_API_KEY`, `EMAIL_FROM`; same sender in Supabase SMTP ([HELP §5.1](HELP.md#51-email-resend)) |
+| AI receipt reading | `AI_PROVIDER`, `AI_API_KEY`, `AI_MODEL` ([§5.2](HELP.md#52-ai-receipt-reading)) |
+| Xero | Nothing to set up: Expenses → Bookkeeping → **Export to Xero** ([§5.3](HELP.md#53-xero-expenses)) |
+| Microsoft 365 (Outlook, SharePoint, Planner) | Entra app registration + permissions + `MS_TENANT_ID`, `MS_CLIENT_ID`, `MS_CLIENT_SECRET`, then switch on per company ([§5.4](HELP.md#54-microsoft-365-outlook-sharepoint-planner)) |
+| Android app | Actions → **Android app** → **Run workflow**, sign, upload to Play ([§5.5](HELP.md#55-android-app-optional)) |
+| Systems integration toolkit | Per company: Admin → Settings → Modules |
+
+Redeploy in Vercel after changing any environment variable.
+
+### Updates — short version
+1. Change and test on `Main`: `pnpm check` and the integration tests.
+2. Add the release to `CHANGELOG.md`, bump `version` in `package.json`, commit, tag `vX.Y.Z`, push.
+3. Back up each customer's database if the release has new migrations.
+4. Apply new migrations to **every** customer's Supabase (`npx supabase link` + `npx supabase db push` per customer).
+5. Move the `release` branch to `Main` and push; every customer's Vercel project rebuilds.
+6. Check each deployment is **Ready**. Roll back with Vercel → Deployments → **Instant Rollback**.
+
+Details, the `release` branch setup and rollback: [HELP.md §6–7](HELP.md#6-updates).
+Problems: [HELP.md §9 Troubleshooting](HELP.md#9-troubleshooting).
 
 ## Development
 
@@ -237,7 +273,7 @@ Demo accounts after `db reset` (local only): `owner@demo.test`, `alice@demo.test
 | `pnpm test:e2e` | Playwright smoke suite; `E2E_SUPABASE=1` adds full journeys |
 | `pnpm check` | All of the above except E2E, plus a production build |
 
-When the repository is connected to Vercel, pushing to `Main` deploys to production. Database changes are SQL migrations in
+Releasing to customers is described in [HELP.md §6](HELP.md#6-updates). Database changes are SQL migrations in
 `supabase/migrations/`, applied in order.
 
 ## Layout
